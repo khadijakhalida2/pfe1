@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نُطقنا - الرئيسية</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #85bae2;
+      --secondary-color: #92cac7;
+      --accent-color: #9999c9;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      padding-top: 80px;
+    }
+    
+    .navbar {
+      background-color: white !important;
+    }
+    
+    .text-primary {
+      color: var(--primary-color) !important;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .hero-section {
+      background-color: #f8f9fa;
+      min-height: calc(100vh - 80px);
+    }
+    
+    .hero-img {
+      max-height: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .nav-link.active {
+      color: var(--primary-color) !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+        <span class="fs-4 fw-bold text-primary">نُطقنا</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">الخدمات</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">اتصل بنا</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary ms-3" href="login.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- القسم الرئيسي -->
+  <section class="hero-section d-flex align-items-center">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- النص -->
+        <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+          <h1 class="mb-4">مرحبًا بك في "نُطقنا"... حيث يبدأ الفهم، وينمو التواصل</h1>
+          <p class="lead mb-4">
+            في عالم الطفل المصاب بالتوحد، كل إشارة هي رسالة، وكل تقدم هو إنجاز.  
+            في "نُطقنا"، نحن هنا لنمشي معك خطوة بخطوة نحو إدراك أعمق واحتواء أكبر.
+          </p>
+          <a href="services.html" class="btn btn-primary px-4 py-2">اكتشف المزيد</a>
+        </div>
+        <!-- الصورة -->
+        <div class="col-lg-6 text-center">
+          <img src="home.png" alt="صورة واجهة" class="img-fluid hero-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

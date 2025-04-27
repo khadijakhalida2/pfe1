@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نُطقنا - تسجيل الدخول</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .gradient-bg {
+      background: var(--gradient);
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .login-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 15px;
+    }
+    .login-card {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .login-header {
+      background: var(--gradient);
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    .login-body {
+      padding: 30px;
+    }
+    .form-control {
+      border-radius: 50px;
+      padding: 12px 20px;
+    }
+    .btn {
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+      border: none;
+    }
+    .text-primary {
+      color: var(--blue);
+    }
+    .btn-outline-primary {
+      background-color: transparent;
+      color: var(--blue);
+      box-shadow: inset 0 0 0 2px var(--blue);
+    }
+    .user-type-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .user-type-btn {
+      flex: 1;
+      border: 2px solid #eee;
+      border-radius: 30px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .user-type-btn:hover {
+      border-color: #c5e1f5;
+    }
+    .user-type-btn.active {
+      border-color: var(--blue);
+      background-color: #f0f9ff;
+    }
+    .form-step {
+      display: none;
+    }
+    .form-step.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="indexd.html">
+      <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="indexd.html">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutd.html">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicesd.html">الخدمات</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold" href="contactd.html">اتصل بنا</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="logind.html">تسجيل الدخول</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="login-section">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>تسجيل الدخول</h2>
+      <p>أدخل بيانات حسابك</p>
+    </div>
+    <div class="login-body">
+      <form id="loginForm" method="POST" action="login.php">
+        <input type="hidden" name="user_type" id="user_type" value="parent">
+        
+        <div class="form-step active" id="userTypeStep">
+          <div class="user-type-selector">
+            <div class="user-type-btn active" data-user-type="parent">ولي أمر</div>
+            <div class="user-type-btn" data-user-type="specialist">أخصائي</div>
+          </div>
+          <button type="button" class="btn btn-primary w-100" id="continueBtn">متابعة</button>
+        </div>
+
+        <div class="form-step" id="loginStep">
+          <div class="mb-3">
+            <label for="email" class="form-label">البريد الإلكتروني</label>
+            <input type="email" class="form-control" name="email" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">كلمة المرور</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">دخول</button>
+          <div class="text-center mt-3">
+            <p>ليس لديك حساب؟ <a href="registerd.html" class="text-primary">إنشاء حساب جديد</a></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const userTypeBtns = document.querySelectorAll('.user-type-btn');
+    const continueBtn = document.getElementById('continueBtn');
+    const userTypeStep = document.getElementById('userTypeStep');
+    const loginStep = document.getElementById('loginStep');
+    const loginForm = document.getElementById('loginForm');
+    const userTypeInput = document.getElementById('user_type');
+    let userType = 'parent';
+
+    userTypeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        userTypeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        userType = this.dataset.userType;
+      });
+    });
+
+    continueBtn.addEventListener('click', function() {
+      userTypeInput.value = userType;
+      userTypeStep.classList.remove('active');
+      loginStep.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

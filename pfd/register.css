@@ -1,0 +1,155 @@
+:root {
+    --blue: #85bae2;
+    --green: #92cac7;
+    --purple: #9999c9;
+    --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+  }
+  
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .gradient-bg {
+    background: var(--gradient);
+    background-size: 200% 200%;
+    animation: gradientAnimation 8s ease infinite;
+  }
+  
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .register-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 15px;
+  }
+  
+  .register-card {
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  
+  .register-header {
+    background: var(--gradient);
+    color: white;
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .register-body {
+    padding: 30px;
+  }
+  
+  .form-control {
+    border-radius: 50px;
+    padding: 12px 20px;
+  }
+  
+  .btn {
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-weight: 600;
+  }
+  
+  .btn-primary {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+  }
+  
+  .text-primary {
+    color: var(--blue);
+  }
+  
+  .user-type-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .user-type-btn {
+    flex: 1;
+    border: 2px solid #eee;
+    border-radius: 30px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .user-type-btn:hover {
+    border-color: #c5e1f5;
+  }
+  
+  .user-type-btn.active {
+    border-color: var(--blue);
+    background-color: #f0f9ff;
+  }
+  
+  .password-strength {
+    height: 5px;
+    background-color: #eee;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    overflow: hidden;
+  }
+  
+  .password-strength-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #dc3545;
+    transition: width 0.3s ease;
+  }
+  
+  .password-match {
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
+  }
+  
+  .password-match.valid {
+    color: #198754;
+  }
+  
+  .password-match.invalid {
+    color: #dc3545;
+  }
+  
+  .form-select {
+    border-radius: 50px;
+    padding: 12px 20px;
+  }
+  
+  .loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: none;
+  }

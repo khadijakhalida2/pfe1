@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملف الطفل - نُطقنا</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* الشريط العلوي */
+    .top-navbar {
+      background: var(--gradient);
+      height: 70px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* الشريط الجانبي */
+    .sidebar {
+      width: 280px;
+      background: white;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+      position: fixed;
+      height: calc(100vh - 70px);
+      right: 0;
+      top: 70px;
+      padding: 20px 0;
+      transition: all 0.3s;
+    }
+
+    .profile-section {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item {
+      padding: 0 15px;
+      margin-bottom: 5px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(133, 186, 226, 0.1);
+      color: var(--blue);
+    }
+
+    .nav-link i {
+      margin-left: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+      margin-right: 280px;
+      margin-top: 70px;
+      padding: 30px;
+    }
+
+    /* بطاقة تعريف الطفل */
+    .child-profile-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    .child-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--blue);
+      margin-left: 30px;
+    }
+
+    .child-info {
+      flex: 1;
+    }
+
+    /* شريط التقدم */
+    .progress-container {
+      margin: 30px 0;
+    }
+
+    .progress-bar {
+      height: 20px;
+      border-radius: 10px;
+      background: #eee;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-level {
+      height: 100%;
+      width: 65%;
+      background: var(--gradient);
+      border-radius: 10px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .progress-label {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .label-weak {
+      background-color: #ffebee;
+      color: #f44336;
+    }
+
+    .label-average {
+      background-color: #fff8e1;
+      color: #ff9800;
+    }
+
+    .label-good {
+      background-color: #e8f5e9;
+      color: #4caf50;
+    }
+
+    /* أقسام الملف */
+    .section-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .report-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .report-item:hover {
+      background-color: #f5f5f5;
+    }
+
+    .report-details {
+      display: none;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .file-upload {
+      border: 2px dashed #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .file-upload:hover {
+      border-color: var(--blue);
+      background-color: #f5faff;
+    }
+
+    .notification-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+
+    .notification-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(133, 186, 226, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      color: var(--blue);
+    }
+
+    /* الأزرار */
+    .btn {
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-weight: 600;
+      border: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #6ca3d1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(133, 186, 226, 0.3);
+    }
+
+    .logout-btn {
+      display: block;
+      width: calc(100% - 30px);
+      margin: 20px auto 0;
+      padding: 10px;
+      text-align: center;
+      color: #dc3545;
+      background: none;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-right: 0;
+      }
+      
+      .child-profile-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .child-avatar {
+        margin-left: 0;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- الشريط العلوي -->
+<nav class="top-navbar">
+  <a href="parent-dashboard.html" class="logo"></a>
+  <button class="btn btn-sm btn-light d-lg-none" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+</nav>
+<!-- الهيدر بدون إطار -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="indexd.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link" href="aboutd.html">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicesd.html">الخدمات</a></li>
+          <li class="nav-item"><a class="nav-link active fw-bold" href="contactd.html">اتصل بنا</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="logind.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- الشريط الجانبي -->
+<div class="sidebar">
+    <div class="profile-section">
+      <a href="parent-dashboard.html">
+        <img src="parent.JPG" alt="صورة الملف الشخصي" class="profile-img">
+      </a>
+      <h5>ولي أمر</h5>
+      <p class="text-muted">مرحباً بعودتك!</p>
+    </div>
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="child-profile.html" class="nav-link active">
+        <i class="fas fa-child"></i>
+        <span>ملف الطفل</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="daily-reports.html" class="nav-link">
+        <i class="fas fa-clipboard-list"></i>
+        <span>تقارير السلوك اليومية</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="doctor-advice.html" class="nav-link">
+        <i class="fas fa-comment-medical"></i>
+        <span>نصائح الطبيب</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="choose-specialist.html" class="nav-link">
+        <i class="fas fa-user-md"></i>
+        <span>اختيار أخصائي</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="videos-courses.html" class="nav-link">
+        <i class="fas fa-video"></i>
+        <span>فيديوهات ودورات</span>
+      </a>
+    </li>
+  </ul>
+  
+  <button class="logout-btn" onclick="window.location.href='logind.html'">
+    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+  </button>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+  <!-- بطاقة تعريف الطفل -->
+  <div class="child-profile-card">
+    <img src="https://ui-avatars.com/api/?name=طفل+توحد&background=85bae2&color=fff" alt="صورة الطفل" class="child-avatar">
+    <div class="child-info">
+      <h3>محمد أحمد</h3>
+      <p><strong>العمر:</strong> 6 سنوات</p>
+      <p><strong>مستوى التوحد:</strong> متوسط</p>
+      <p><strong>تاريخ الانضمام:</strong> 15 مارس 2023</p>
+    </div>
+  </div>
+
+  <!-- شريط تقدم الحالة الصحية -->
+  <div class="section-card">
+    <h4 class="section-title">تقدم الحالة الصحية</h4>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-level"></div>
+      </div>
+      <div class="progress-labels">
+        <span class="progress-label label-weak">ضعيف</span>
+        <span class="progress-label label-average">مقبول</span>
+        <span class="progress-label label-good">جيد</span>
+      </div>
+    </div>
+    <p class="text-muted mt-3">آخر تحديث: 10 يونيو 2023 بواسطة د. سارة محمد</p>
+  </div>
+
+  <!-- التقارير السابقة -->
+  <div class="section-card">
+    <h4 class="section-title">التقارير السابقة</h4>
+    <div class="report-item" onclick="toggleReportDetails(this)">
+      <div class="d-flex justify-content-between">
+        <strong>تقرير 15 يونيو 2023</strong>
+        <span class="badge bg-primary">جديد</span>
+      </div>
+      <div class="report-details">
+        <p>تحسن ملحوظ في التواصل البصري، يحتاج إلى مزيد من التدريب على المهارات الاجتماعية.</p>
+        <p class="text-muted">بواسطة: د. سارة محمد</p>
+      </div>
+    </div>
+    <div class="report-item" onclick="toggleReportDetails(this)">
+      <strong>تقرير 1 يونيو 2023</strong>
+      <div class="report-details">
+        <p>بداية جيدة في برنامج التدريب، يحتاج إلى تكثيف الجلسات الأسبوعية.</p>
+        <p class="text-muted">بواسطة: د. سارة محمد</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- تحميل الملفات -->
+  <div class="section-card">
+    <h4 class="section-title">الملفات المرفوعة</h4>
+    <div class="file-upload">
+      <i class="fas fa-cloud-upload-alt fa-2x mb-3" style="color: var(--blue);"></i>
+      <p>اسحب الملفات هنا أو انقر للرفع</p>
+      <button class="btn btn-primary mt-2">اختر ملفات</button>
+    </div>
+    <div class="mt-3">
+      <div class="d-flex justify-content-between align-items-center p-2 border-bottom">
+        <span>التقرير_الطبي.pdf</span>
+        <button class="btn btn-sm btn-outline-primary">تحميل</button>
+      </div>
+      <div class="d-flex justify-content-between align-items-center p-2 border-bottom">
+        <span>خطة_العلاج.docx</span>
+        <button class="btn btn-sm btn-outline-primary">تحميل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- الإشعارات -->
+  <div class="section-card">
+    <h4 class="section-title">الإشعارات والمتابعات</h4>
+    <div class="notification-item">
+      <div class="notification-icon">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+      <div>
+        <strong>موعد قادم</strong>
+        <p>جلسة مع د. سارة محمد يوم الأحد 18 يونيو الساعة 10 صباحاً</p>
+      </div>
+    </div>
+    <div class="notification-item">
+      <div class="notification-icon">
+        <i class="fas fa-comment-medical"></i>
+      </div>
+      <div>
+        <strong>ملاحظة جديدة</strong>
+        <p>أرسل د. سارة محمد ملاحظات جديدة حول تقدم محمد</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleReportDetails(element) {
+    const details = element.querySelector('.report-details');
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // تبديل القائمة الجانبية
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+
+    // إغلاق القائمة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+      const sidebar = document.querySelector('.sidebar');
+      const menuToggle = document.getElementById('menuToggle');
+      
+      if (!sidebar.contains(e.target) && e.target !== menuToggle && !menuToggle.contains(e.target)) {
+        sidebar.classList.remove('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

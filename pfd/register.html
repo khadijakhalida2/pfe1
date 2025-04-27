@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب جديد - نُطقنا</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+<!-- الهيدر -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">الخدمات</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold" href="contact.html">اتصل بنا</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="login.html">تسجيل الدخول</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="register-section">
+  <div class="register-card">
+    <div class="register-header">
+      <h2>إنشاء حساب جديد</h2>
+      <p>اختر نوع الحساب وأكمل المعلومات</p>
+    </div>
+    <div class="register-body">
+      <form id="registerForm">
+        <!-- اختيار نوع المستخدم -->
+        <div class="user-type-selector">
+          <div class="user-type-btn active" data-user-type="parent">
+            ولي أمر
+          </div>
+          <div class="user-type-btn" data-user-type="specialist">
+            أخصائي
+          </div>
+        </div>
+
+        <!-- حقول التسجيل العامة -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">الاسم الكامل</label>
+          <input type="text" class="form-control" id="fullName" required>
+          <div class="error-message" id="fullNameError">الاسم الكامل مطلوب</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">البريد الإلكتروني</label>
+          <input type="email" class="form-control" id="email" required>
+          <div class="error-message" id="emailError">البريد الإلكتروني غير صحيح</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">كلمة المرور</label>
+          <input type="password" class="form-control" id="password" required>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+          </div>
+          <small class="text-muted">يجب أن تحتوي على 8 أحرف على الأقل</small>
+          <div class="error-message" id="passwordError">كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">تأكيد كلمة المرور</label>
+          <input type="password" class="form-control" id="confirmPassword" required>
+          <div class="password-match invalid" id="passwordMatch">كلمات المرور غير متطابقة</div>
+        </div>
+
+        <!-- حقول إضافية حسب نوع المستخدم -->
+        <div id="extraFields">
+          <!-- حقول ولي الأمر -->
+          <div id="parentFields">
+            <div class="mb-3">
+              <label for="childName" class="form-label">اسم الطفل</label>
+              <input type="text" class="form-control" id="childName" required>
+              <div class="error-message" id="childNameError">اسم الطفل مطلوب</div>
+            </div>
+            <div class="mb-3">
+              <label for="childAge" class="form-label">عمر الطفل</label>
+              <input type="number" class="form-control" id="childAge" min="1" max="18" required>
+              <div class="error-message" id="childAgeError">عمر الطفل يجب أن يكون بين 1 و 18 سنة</div>
+            </div>
+            <div class="mb-3">
+              <label for="autismLevel" class="form-label">مستوى التوحد</label>
+              <select class="form-select" id="autismLevel" required>
+                <option value="" selected disabled>اختر مستوى التوحد</option>
+                <option value="low">منخفض</option>
+                <option value="medium">متوسط</option>
+                <option value="high">مرتفع</option>
+              </select>
+              <div class="error-message" id="autismLevelError">مستوى التوحد مطلوب</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+          <label class="form-check-label" for="agreeTerms">
+            أوافق على <a href="#" class="text-primary">الشروط والأحكام</a>
+          </label>
+          <div class="error-message" id="agreeTermsError">يجب الموافقة على الشروط والأحكام</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+          <span class="loading-spinner" id="loadingSpinner"></span>
+          <span id="submitText">إنشاء الحساب</span>
+        </button>
+
+        <div class="text-center mt-3">
+          <p>لديك حساب بالفعل؟ <a href="login.html" class="text-primary">تسجيل الدخول</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="js/register.js"></script>
+</body>
+</html>

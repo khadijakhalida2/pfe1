@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نطقنا</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #444;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #9999c9;
+    }
+
+    .main-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px;
+      flex-wrap: wrap;
+    }
+
+    .main-text {
+      flex: 1;
+      max-width: 550px;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .main-text h1 {
+      font-size: 2.3em;
+      margin-bottom: 20px;
+    }
+
+    .main-text p {
+      font-size: 1.1em;
+      line-height: 2;
+      margin-bottom: 30px;
+    }
+
+    .btn-discover {
+      background-color: #ffffff;
+      color: #85bae2;
+      border: 2px solid #85bae2;
+      padding: 10px 25px;
+      font-size: 1em;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-discover:hover {
+      background-color: #85bae2;
+      color: #fff;
+    }
+
+    .main-image {
+      flex: 1;
+      max-width: 450px;
+      animation: floatImage 4s ease-in-out infinite;
+    }
+
+    .main-image img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatImage {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* قائمة تسجيل الدخول */
+    .login-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .login-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 1;
+      border-radius: 8px;
+    }
+
+    .login-dropdown-content a {
+      color: #444;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .login-dropdown-content a:hover {
+      background-color: #eee;
+    }
+
+    .login-dropdown:hover .login-dropdown-content {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .main-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .main-image, .main-text {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <!-- ضع صورة الشعار هنا -->
+      <img src="logo.png" alt="نطقنا">
+    </div>
+    <nav>
+      <a href="#">الصفحة الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#contact">اتصل بنا</a>
+      <div class="login-dropdown">
+        <a href="#">تسجيل الدخول</a>
+        <div class="login-dropdown-content">
+          <a href="login-parent.html">ولي أمر</a>
+          <a href="login-specialist.html">أخصائي</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="main-section">
+    <div class="main-text">
+      <h1>مرحبًا بك في “نُطقنا”… حيث يبدأ الفهم، وينمو التواصل</h1>
+      <p>
+        في عالم الطفل المصاب بالتوحد، كل إشارة هي رسالة، وكل تقدم هو إنجاز.<br>
+        نحن هنا لنمشي معك خطوة بخطوة نحو إدراك أعمق واحتواء أكبر.<br><br>
+
+        • لكل طفل طريقٌ فريد يستحق من يفهمه.<br>
+        • لكل ولي أمر حق في الدعم والمعلومة الصحيحة.<br>
+        • لكل أخصائي فرصة ليُحدث فرقًا حقيقيًا.<br><br>
+
+        عبر منصتنا يمكنك:<br>
+        • متابعة تطوّر طفلك يوميًا والتواصل مع الأخصائيين المختصين.<br>
+        • الاستفادة من نصائح علمية موثوقة مخصصة لحالة طفلك.<br>
+        • حجز مواعيد بسهولة مع نخبة من المتخصصين.<br>
+        • الوصول إلى مكتبة من الفيديوهات التوعوية والجلسات التدريبية.<br>
+        <br>
+        نُطقنا… منصة دعم، فهم، واحتواء.
+      </p>
+      <a href="#more" class="btn-discover">اكتشف المزيد</a>
+    </div>
+
+    <div class="main-image">
+      <!-- ضع هنا صورتك التوضيحية -->
+      <img src="home.png" alt="صورة ترحيبية">
+    </div>
+  </section>
+
+</body>
+</html>

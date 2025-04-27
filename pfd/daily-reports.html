@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تقارير السلوك اليومية - نُطقنا</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* الشريط العلوي */
+    .top-navbar {
+      background: var(--gradient);
+      height: 70px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 0 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    /* الشريط الجانبي - مطابق تمامًا للوحة التحكم */
+    .sidebar {
+      width: 280px;
+      background: white;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+      position: fixed;
+      height: calc(100vh - 70px);
+      right: 0;
+      top: 70px;
+      padding: 20px 0;
+      transition: all 0.3s;
+    }
+
+    .profile-section {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item {
+      padding: 0 15px;
+      margin-bottom: 5px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(133, 186, 226, 0.1);
+      color: var(--blue);
+    }
+
+    .nav-link i {
+      margin-left: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .logout-btn {
+      display: block;
+      width: calc(100% - 30px);
+      margin: 20px auto 0;
+      padding: 10px;
+      text-align: center;
+      color: #dc3545;
+      background: none;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+      margin-right: 280px;
+      margin-top: 70px;
+      padding: 30px;
+    }
+
+    /* بطاقة التقرير */
+    .report-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      color: var(--blue);
+      border-bottom: 2px solid var(--green);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* نمط المدخلات */
+    .form-control, .form-select {
+      border-radius: 50px;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 0.25rem rgba(133, 186, 226, 0.25);
+    }
+
+    /* الأزرار */
+    .btn {
+      border-radius: 50px;
+      padding: 12px 25px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #6ca3d1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(133, 186, 226, 0.3);
+    }
+
+    /* سلوكيات الطفل */
+    .behavior-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+    }
+
+    .behavior-checkbox {
+      margin-left: 15px;
+    }
+
+    /* التقارير السابقة */
+    .past-report {
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+      transition: all 0.3s;
+    }
+
+    .past-report:hover {
+      background-color: #f5f5f5;
+    }
+
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="indexd.html">الرئيسية</a></li>
+              <li class="nav-item"><a class="nav-link" href="aboutd.html">من نحن</a></li>
+              <li class="nav-item"><a class="nav-link" href="servicesd.html">الخدمات</a></li>
+              <li class="nav-item"><a class="nav-link active fw-bold" href="contactd.html">اتصل بنا</a></li>
+              <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="logind.html">تسجيل الدخول</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+<!-- الشريط العلوي -->
+<nav class="top-navbar">
+  <button class="btn btn-sm btn-light d-lg-none" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+</nav>
+
+<!-- الشريط الجانبي - مطابق للوحة التحكم -->
+<<<div class="sidebar">
+    <div class="profile-section">
+      <a href="parent-dashboard.html">
+        <img src="parent.JPG" alt="صورة الملف الشخصي" class="profile-img">
+      </a>
+      <h5>ولي أمر</h5>
+      <p class="text-muted">مرحباً بعودتك!</p>
+    </div>
+  
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="child-profile.html" class="nav-link">
+        <i class="fas fa-child"></i>
+        <span>ملف الطفل</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="daily-reports.html" class="nav-link active">
+        <i class="fas fa-clipboard-list"></i>
+        <span>تقارير السلوك اليومية</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="doctor-advice.html" class="nav-link">
+        <i class="fas fa-comment-medical"></i>
+        <span>نصائح الطبيب</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="choose-specialist.html" class="nav-link">
+        <i class="fas fa-user-md"></i>
+        <span>اختيار أخصائي</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="videos-courses.html" class="nav-link">
+        <i class="fas fa-video"></i>
+        <span>فيديوهات ودورات</span>
+      </a>
+    </li>
+  </ul>
+  
+  <button class="logout-btn" onclick="window.location.href='logind.html'">
+    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+  </button>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+  <div class="report-card">
+    <h3 class="section-title">تقرير سلوك يومي جديد</h3>
+    
+    <div class="mb-4">
+      <label class="form-label">تاريخ التقرير</label>
+      <input type="date" class="form-control" id="reportDate">
+    </div>
+    
+    <div class="mb-4">
+      <label class="form-label">اختر السلوكيات الملاحظة</label>
+      
+      <div class="behavior-item">
+        <input type="checkbox" class="behavior-checkbox" id="behavior1">
+        <label for="behavior1">تحسن في التواصل البصري</label>
+      </div>
+      
+      <div class="behavior-item">
+        <input type="checkbox" class="behavior-checkbox" id="behavior2">
+        <label for="behavior2">تفاعل مع الألعاب الاجتماعية</label>
+      </div>
+      
+      <div class="behavior-item">
+        <input type="checkbox" class="behavior-checkbox" id="behavior3">
+        <label for="behavior3">استجابة للأوامر البسيطة</label>
+      </div>
+      
+      <div class="behavior-item">
+        <input type="checkbox" class="behavior-checkbox" id="behavior4">
+        <label for="behavior4">نوبات غضب أو انزعاج</label>
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <label class="form-label">ملاحظات إضافية</label>
+      <textarea class="form-control" rows="5" id="additionalNotes" 
+                placeholder="أدخل أي ملاحظات إضافية عن سلوك الطفل اليوم"></textarea>
+    </div>
+    
+    <div class="mb-4">
+      <label class="form-label">مستوى التقدم العام</label>
+      <select class="form-select" id="progressLevel">
+        <option value="weak">ضعيف</option>
+        <option value="average">متوسط</option>
+        <option value="good">جيد</option>
+      </select>
+    </div>
+    
+    <button class="btn btn-primary w-100" onclick="submitReport()">
+      <i class="fas fa-paper-plane"></i> إرسال التقرير للأخصائي
+    </button>
+  </div>
+  
+  <!-- التقارير السابقة -->
+  <div class="report-card mt-4">
+    <h3 class="section-title">التقارير السابقة</h3>
+    
+    <div class="past-report">
+      <div class="d-flex justify-content-between">
+        <strong>تقرير 15 يونيو 2023</strong>
+        <span class="badge bg-primary">مرسل</span>
+      </div>
+      <p class="text-muted">تحسن في التواصل البصري، نوبة غضب واحدة</p>
+    </div>
+    
+    <div class="past-report">
+      <div class="d-flex justify-content-between">
+        <strong>تقرير 14 يونيو 2023</strong>
+        <span class="badge bg-success">تمت المراجعة</span>
+      </div>
+      <p class="text-muted">تفاعل جيد مع الألعاب الاجتماعية</p>
+    </div>
+    
+    <div class="past-report">
+      <div class="d-flex justify-content-between">
+        <strong>تقرير 13 يونيو 2023</strong>
+        <span class="badge bg-success">تمت المراجعة</span>
+      </div>
+      <p class="text-muted">استجابة جيدة للأوامر البسيطة</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // دالة إرسال التقرير
+  function submitReport() {
+    const reportData = {
+      date: document.getElementById('reportDate').value,
+      behaviors: [
+        { id: 'behavior1', checked: document.getElementById('behavior1').checked },
+        { id: 'behavior2', checked: document.getElementById('behavior2').checked },
+        { id: 'behavior3', checked: document.getElementById('behavior3').checked },
+        { id: 'behavior4', checked: document.getElementById('behavior4').checked }
+      ],
+      notes: document.getElementById('additionalNotes').value,
+      progress: document.getElementById('progressLevel').value
+    };
+    
+    // هنا يمكنك إضافة كود لإرسال البيانات للخادم
+    console.log('تم إرسال التقرير:', reportData);
+    
+    alert('تم إرسال التقرير بنجاح إلى الأخصائي المعالج');
+    
+    // إعادة تعيين النموذج
+    document.querySelectorAll('.behavior-checkbox').forEach(cb => cb.checked = false);
+    document.getElementById('additionalNotes').value = '';
+    
+    // إضافة التقرير الجديد للقائمة (مؤقت)
+    const reportsContainer = document.querySelector('.report-card:last-child');
+    const newReport = document.createElement('div');
+    newReport.className = 'past-report';
+    newReport.innerHTML = `
+      <div class="d-flex justify-content-between">
+        <strong>تقرير ${new Date().toLocaleDateString('ar-EG')}</strong>
+        <span class="badge bg-primary">مرسل</span>
+      </div>
+      <p class="text-muted">${reportData.notes || 'لا توجد ملاحظات إضافية'}</p>
+    `;
+    reportsContainer.insertBefore(newReport, reportsContainer.firstChild.nextSibling);
+  }
+
+  // تبديل القائمة الجانبية في الهواتف
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('active');
+  });
+
+  // تعيين تاريخ اليوم كقيمة افتراضية
+  document.getElementById('reportDate').valueAsDate = new Date();
+</script>
+
+</body>
+</html>

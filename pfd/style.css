@@ -1,0 +1,85 @@
+body {
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    color: #333;
+    scroll-behavior: smooth;
+  }
+  
+  .navbar-brand span {
+    font-size: 1.8rem;
+  }
+  
+  .nav-link {
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #fff !important;
+    background-color: #92cac7;
+    border-radius: 5px;
+    padding: 6px 10px;
+  }
+  
+  .hero-section {
+    padding-top: 100px;
+  }
+  
+  .hero-img {
+    max-width: 90%;
+    transition: transform 0.8s ease;
+  }
+  
+  .hero-img:hover {
+    transform: scale(1.05);
+  }
+  
+  .animate-text {
+    animation: fadeInUp 1.3s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* تكبير شعار اللوقو فقط */
+.navbar-brand img {
+    height: 65px; /* أكبر من 50px السابق */
+    width: auto;
+  }
+  
+  /* لون أزرار أزرق فاتح (زر تسجيل الدخول واكتشف المزيد) */
+  .btn-primary {
+    background-color: #9EC6F3;
+    border-color: #9EC6F3;
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #85bae2;
+    border-color: #85bae2;
+  }
+  
+  /* منع الشريط العلوي من التمدد */
+  .navbar {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+  /* زر اكتشف المزيد بلون متناسق مع الخلفية */
+.btn-discover {
+    background-color: #ffffff;
+    color: #85bae2;
+    border: 2px solid #85bae2;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-discover:hover {
+    background-color: #85bae2;
+    color: white;
+    border-color: #85bae2;
+  }

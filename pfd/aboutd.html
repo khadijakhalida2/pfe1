@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نُطقنا - من نحن</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --dark: #333;
+      --light: #f8f9fa;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* التدرج اللوني في الخلفية */
+    .gradient-bg {
+      background: var(--gradient);
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+    
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* الهيدر بدون إطار */
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      border-bottom: none !important;
+    }
+    
+    .navbar-brand {
+      font-weight: 800;
+    }
+    
+    .text-primary {
+      color: var(--blue) !important;
+    }
+    
+    /* أزرار بدون إطار */
+    .btn {
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+    }
+    
+    .btn-outline-primary {
+      background-color: transparent;
+      color: var(--blue);
+      box-shadow: inset 0 0 0 2px var(--blue);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--blue);
+      color: white;
+    }
+    
+    /* تأثيرات النص */
+    .text-gradient {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* قسم المحتوى */
+    .content-section {
+      padding: 100px 0;
+      background-color: white;
+    }
+    
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--gradient);
+      margin-top: 15px;
+      border-radius: 2px;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* التأثيرات على الشاشات الصغيرة */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الهيدر بدون إطار -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="indexd.html">
+        <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+    
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="indexd.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link active fw-bold" href="aboutd.html">من نحن</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicesd.html">الخدمات</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactd.html">اتصل بنا</a></li>
+          <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="logind.html">تسجيل الدخول</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- محتوى الصفحة -->
+  <main class="content-section">
+    <div class="container">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+          <h1 class="section-title">من <span class="text-gradient">نحن</span></h1>
+          <p class="lead">نُطقنا منصة متخصصة لدعم أولياء أمور الأطفال المصابين بالتوحد، نقدم خدمات متكاملة لتسهيل رحلة العلاج والتأهيل.</p>
+          <p>تأسست منصتنا عام 2023 بهدف سد الفجوة بين الأسر والمتخصصين في مجال التوحد، ونؤمن بأن كل طفل يستحق فرصة للتعبير عن نفسه.</p>
+        </div>
+        <div class="col-lg-6">
+           <img src="about-image.png" alt="صورة عن الفريق" class="img-fluid rounded">
+        </div>
+      </div>
+      
+      <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+          <div class="text-center p-4">
+            <div class="feature-icon">🏆</div>
+            <h3>رؤيتنا</h3>
+            <p>أن نكون المنصة الرائدة في دعم أطفال التوحد وأسرهم في العالم العربي</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="text-center p-4">
+            <div class="feature-icon">🎯</div>
+            <h3>رسالتنا</h3>
+            <p>تمكين الأسر من خلال تقديم حلول مبتكرة وخدمات متكاملة</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="text-center p-4">
+            <div class="feature-icon">❤️</div>
+            <h3>قيمنا</h3>
+            <p>التعاطف، الاحتراف، الشفافية، والابتكار</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

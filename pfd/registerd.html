@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب جديد - نُطقنا</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .gradient-bg {
+      background: var(--gradient);
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .register-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 15px;
+    }
+
+    .register-card {
+      max-width: 500px;
+      width: 100%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .register-header {
+      background: var(--gradient);
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .register-body {
+      padding: 30px;
+    }
+
+    .form-control {
+      border-radius: 50px;
+      padding: 12px 20px;
+    }
+
+    .btn {
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background-color: var(--blue);
+      color: white;
+      border: none;
+    }
+
+    .text-primary {
+      color: var(--blue);
+    }
+
+    .user-type-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .user-type-btn {
+      flex: 1;
+      border: 2px solid #eee;
+      border-radius: 30px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .user-type-btn:hover {
+      border-color: #c5e1f5;
+    }
+
+    .user-type-btn.active {
+      border-color: var(--blue);
+      background-color: #f0f9ff;
+    }
+
+    .password-strength {
+      height: 5px;
+      background-color: #eee;
+      border-radius: 5px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #dc3545;
+      transition: width 0.3s ease;
+    }
+
+    .password-match {
+      font-size: 0.875rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .password-match.valid {
+      color: #198754;
+    }
+
+    .password-match.invalid {
+      color: #dc3545;
+    }
+
+    .form-select {
+      border-radius: 50px;
+      padding: 12px 20px;
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.875rem;
+      margin-top: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<!-- الهيدر -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">الخدمات</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold" href="contact.html">اتصل بنا</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="login.html">تسجيل الدخول</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="register-section">
+  <div class="register-card">
+    <div class="register-header">
+      <h2>إنشاء حساب جديد</h2>
+      <p>اختر نوع الحساب وأكمل المعلومات</p>
+    </div>
+    <div class="register-body">
+      <form id="registerForm">
+        <!-- اختيار نوع المستخدم -->
+        <div class="user-type-selector">
+          <div class="user-type-btn active" data-user-type="parent">
+            ولي أمر
+          </div>
+          <div class="user-type-btn" data-user-type="specialist">
+            أخصائي
+          </div>
+        </div>
+
+        <!-- حقول التسجيل العامة -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">الاسم الكامل</label>
+          <input type="text" class="form-control" id="fullName" required>
+          <div class="error-message" id="fullNameError">الاسم الكامل مطلوب</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">البريد الإلكتروني</label>
+          <input type="email" class="form-control" id="email" required>
+          <div class="error-message" id="emailError">البريد الإلكتروني غير صحيح</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">كلمة المرور</label>
+          <input type="password" class="form-control" id="password" required>
+          <div class="password-strength">
+            <div class="password-strength-bar" id="passwordStrengthBar"></div>
+          </div>
+          <small class="text-muted">يجب أن تحتوي على 8 أحرف على الأقل</small>
+          <div class="error-message" id="passwordError">كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">تأكيد كلمة المرور</label>
+          <input type="password" class="form-control" id="confirmPassword" required>
+          <div class="password-match invalid" id="passwordMatch">كلمات المرور غير متطابقة</div>
+        </div>
+
+        <!-- حقول إضافية حسب نوع المستخدم -->
+        <div id="extraFields">
+          <!-- حقول ولي الأمر -->
+          <div id="parentFields">
+            <div class="mb-3">
+              <label for="childName" class="form-label">اسم الطفل</label>
+              <input type="text" class="form-control" id="childName" required>
+              <div class="error-message" id="childNameError">اسم الطفل مطلوب</div>
+            </div>
+            <div class="mb-3">
+              <label for="childAge" class="form-label">عمر الطفل</label>
+              <input type="number" class="form-control" id="childAge" min="1" max="18" required>
+              <div class="error-message" id="childAgeError">عمر الطفل يجب أن يكون بين 1 و 18 سنة</div>
+            </div>
+            <div class="mb-3">
+              <label for="autismLevel" class="form-label">مستوى التوحد</label>
+              <select class="form-select" id="autismLevel" required>
+                <option value="" selected disabled>اختر مستوى التوحد</option>
+                <option value="low">منخفض</option>
+                <option value="medium">متوسط</option>
+                <option value="high">مرتفع</option>
+              </select>
+              <div class="error-message" id="autismLevelError">مستوى التوحد مطلوب</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+          <label class="form-check-label" for="agreeTerms">
+            أوافق على <a href="#" class="text-primary">الشروط والأحكام</a>
+          </label>
+          <div class="error-message" id="agreeTermsError">يجب الموافقة على الشروط والأحكام</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+          <span class="loading-spinner" id="loadingSpinner"></span>
+          <span id="submitText">إنشاء الحساب</span>
+        </button>
+
+        <div class="text-center mt-3">
+          <p>لديك حساب بالفعل؟ <a href="login.html" class="text-primary">تسجيل الدخول</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const userTypeBtns = document.querySelectorAll('.user-type-btn');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const passwordMatch = document.getElementById('passwordMatch');
+    const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+    const extraFields = document.getElementById('extraFields');
+    const parentFields = document.getElementById('parentFields');
+    const submitBtn = document.getElementById('submitBtn');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const submitText = document.getElementById('submitText');
+    let currentUserType = 'parent';
+
+    // حقول الأخصائي
+    const specialistFields = `
+      <div id="specialistFields">
+        <div class="mb-3">
+          <label for="specialty" class="form-label">التخصص</label>
+          <select class="form-select" id="specialty" required>
+            <option value="" selected disabled>اختر التخصص</option>
+            <option value="psychologist">أخصائي نفسي</option>
+            <option value="speech_therapist">أخصائي أرطفوني</option>
+            <option value="occupational_therapist">أخصائي علاج وظيفي</option>
+            <option value="behavioral_therapist">أخصائي علاج سلوكي</option>
+          </select>
+          <div class="error-message" id="specialtyError">التخصص مطلوب</div>
+        </div>
+        <div class="mb-3">
+          <label for="license" class="form-label">رقم الرخصة المهنية</label>
+          <input type="text" class="form-control" id="license" required>
+          <div class="error-message" id="licenseError">رقم الرخصة المهنية مطلوب</div>
+        </div>
+      </div>
+    `;
+
+    // اختيار نوع المستخدم
+    userTypeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        userTypeBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentUserType = this.dataset.userType;
+        
+        // تحديث الحقول الإضافية
+        if(currentUserType === 'parent') {
+          extraFields.innerHTML = parentFields.outerHTML;
+        } else {
+          extraFields.innerHTML = specialistFields;
+        }
+      });
+    });
+
+    // التحقق من قوة كلمة المرور
+    passwordInput.addEventListener('input', function(e) {
+      const password = e.target.value;
+      let strength = 0;
+      
+      if(password.length >= 8) strength += 1;
+      if(password.length >= 12) strength += 1;
+      if(/[A-Z]/.test(password)) strength += 1;
+      if(/[0-9]/.test(password)) strength += 1;
+      if(/[^A-Za-z0-9]/.test(password)) strength += 1;
+      
+      const width = (strength / 5) * 100;
+      passwordStrengthBar.style.width = `${width}%`;
+      
+      if(strength <= 2) {
+        passwordStrengthBar.style.backgroundColor = '#dc3545';
+      } else if(strength <= 4) {
+        passwordStrengthBar.style.backgroundColor = '#fd7e14';
+      } else {
+        passwordStrengthBar.style.backgroundColor = '#198754';
+      }
+    });
+
+    // التحقق من تطابق كلمة المرور
+    confirmPasswordInput.addEventListener('input', function() {
+      if(passwordInput.value && confirmPasswordInput.value) {
+        if(passwordInput.value === confirmPasswordInput.value) {
+          passwordMatch.textContent = "كلمات المرور متطابقة";
+          passwordMatch.classList.remove('invalid');
+          passwordMatch.classList.add('valid');
+          passwordMatch.style.display = 'block';
+        } else {
+          passwordMatch.textContent = "كلمات المرور غير متطابقة";
+          passwordMatch.classList.remove('valid');
+          passwordMatch.classList.add('invalid');
+          passwordMatch.style.display = 'block';
+        }
+      } else {
+        passwordMatch.style.display = 'none';
+      }
+    });
+
+    // معالجة تسجيل الحساب
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // إخفاء جميع رسائل الخطأ
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+
+      // جمع البيانات من النموذج
+      const formData = {
+          user_type: currentUserType,
+          fullName: document.getElementById('fullName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value,
+          confirmPassword: document.getElementById('confirmPassword').value
+      };
+      
+      // إضافة حقول إضافية حسب نوع المستخدم
+      if(currentUserType === 'parent') {
+          formData.childName = document.getElementById('childName').value.trim();
+          formData.childAge = document.getElementById('childAge').value;
+          formData.autismLevel = document.getElementById('autismLevel').value;
+      } else {
+          formData.specialty = document.getElementById('specialty').value;
+          formData.license = document.getElementById('license').value.trim();
+      }
+      
+      // التحقق من صحة البيانات قبل الإرسال
+      if(!validateFormData(formData)) {
+          return;
+      }
+      
+      // إرسال البيانات إلى السيرفر
+      sendRegistrationData(formData);
+    });
+
+    // دالة التحقق من صحة البيانات
+    function validateFormData(data) {
+      let isValid = true;
+      
+      // التحقق من الحقول المطلوبة
+      if(!data.fullName) {
+        document.getElementById('fullNameError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if(!data.email) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+      } else if(!validateEmail(data.email)) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if(!data.password) {
+        document.getElementById('passwordError').style.display = 'block';
+        isValid = false;
+      } else if(data.password.length < 8) {
+        document.getElementById('passwordError').textContent = 'كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل';
+        document.getElementById('passwordError').style.display = 'block';
+        isValid = false;
+      }
+      
+      if(data.password !== data.confirmPassword) {
+        passwordMatch.textContent = "كلمات المرور غير متطابقة";
+        passwordMatch.classList.remove('valid');
+        passwordMatch.classList.add('invalid');
+        passwordMatch.style.display = 'block';
+        isValid = false;
+      }
+      
+      if(!document.getElementById('agreeTerms').checked) {
+        document.getElementById('agreeTermsError').style.display = 'block';
+        isValid = false;
+      }
+      
+      // التحقق من حقول ولي الأمر
+      if(data.user_type === 'parent') {
+        if(!data.childName) {
+          document.getElementById('childNameError').style.display = 'block';
+          isValid = false;
+        }
+        
+        if(!data.childAge || data.childAge < 1 || data.childAge > 18) {
+          document.getElementById('childAgeError').style.display = 'block';
+          isValid = false;
+        }
+        
+        if(!data.autismLevel) {
+          document.getElementById('autismLevelError').style.display = 'block';
+          isValid = false;
+        }
+      } else {
+        // التحقق من حقول الأخصائي
+        if(!data.specialty) {
+          document.getElementById('specialtyError').style.display = 'block';
+          isValid = false;
+        }
+        
+        if(!data.license) {
+          document.getElementById('licenseError').style.display = 'block';
+          isValid = false;
+        }
+      }
+      
+      return isValid;
+    }
+    
+    // دالة التحقق من صحة البريد الإلكتروني
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // دالة إرسال البيانات إلى السيرفر
+    function sendRegistrationData(data) {
+      // عرض مؤشر التحميل
+      loadingSpinner.style.display = 'inline-block';
+      submitText.textContent = 'جاري إنشاء الحساب...';
+      submitBtn.disabled = true;
+      
+      fetch('api/register.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+          if(!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => {
+          if(data.success) {
+              alert(data.message);
+              window.location.href = data.redirect;
+          } else {
+              showErrorMessages(data.errors);
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('حدث خطأ أثناء الاتصال بالسيرفر: ' + error.message);
+      })
+      .finally(() => {
+          // إخفاء مؤشر التحميل
+          loadingSpinner.style.display = 'none';
+          submitText.textContent = 'إنشاء الحساب';
+          submitBtn.disabled = false;
+      });
+    }
+    
+    // دالة لعرض رسائل الخطأ
+    function showErrorMessages(errors) {
+      errors.forEach(error => {
+        const field = Object.keys(error)[0];
+        const message = error[field];
+        const errorElement = document.getElementById(`${field}Error`);
+        
+        if(errorElement) {
+          errorElement.textContent = message;
+          errorElement.style.display = 'block';
+        } else {
+          alert(message);
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

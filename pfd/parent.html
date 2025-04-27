@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نطقنا - ولي الأمر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #85bae2;
+            --green: #92cac7;
+            --purple: #9999c9;
+            --dark: #333;
+            --light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* الشريط الجانبي */
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            color: var(--purple);
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .hamburger-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 12px 15px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--green);
+            color: white;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 30px;
+        }
+        
+        /* الصفحة الرئيسية */
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .welcome-text {
+            flex: 1;
+        }
+        
+        .welcome-heading {
+            font-size: 32px;
+            color: var(--purple);
+            margin-bottom: 20px;
+        }
+        
+        .welcome-description {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features-list li {
+            position: relative;
+            padding-right: 25px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .features-list li::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--blue);
+        }
+        
+        .welcome-image {
+            flex: 1;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* صفحة ملف الطفل */
+        .child-profile {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .child-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--green);
+        }
+        
+        .child-info h2 {
+            margin: 0;
+            color: var(--purple);
+        }
+        
+        .progress-section {
+            margin: 30px 0;
+        }
+        
+        .progress-bar-container {
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--blue);
+            border-radius: 10px;
+            width: 65%;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--blue);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--purple);
+            color: white;
+        }
+        
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                z-index: 100;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .hamburger-menu {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 90;
+            }
+            
+            .welcome-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <div class="logo">نطقنا</div>
+                <div>نرافقك بخطى واثقة نحو فهم أعمق لطفلك</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active" data-page="home">الصفحة الرئيسية</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="child">ملف الطفل</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="advice">نصائح طبية</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="specialists">الأخصائيون</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" data-page="videos">فيديوهات وتقارير</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="logout">خروج</a></li>
+            </ul>
+        </div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <!-- زر القائمة للجوال -->
+            <div class="hamburger-menu" id="hamburger">☰</div>
+            
+            <!-- الصفحة الرئيسية -->
+            <div id="home-page">
+                <div class="welcome-section">
+                    <div class="welcome-text">
+                        <h1 class="welcome-heading">نرافقك بخطى واثقة نحو فهم أعمق لطفلك</h1>
+                        <p class="welcome-description">في منصة نطقنا، نؤمن أن لكل طفل طريقه الخاص، ومهمتنا أن نكون معك في كل خطوة:</p>
+                        
+                        <ul class="features-list">
+                            <li>سجّل لحظات تطور طفلك يوميًا وشاركها مع الأخصائيين</li>
+                            <li>اطّلع على إرشادات علمية موجّهة خصيصًا لحالة طفلك</li>
+                            <li>اختر الأخصائي المناسب وتواصل معه بمرونة وسهولة</li>
+                            <li>استمتع بمكتبة غنية من الفيديوهات والدورات التفاعلية المصممة لدعمك</li>
+                        </ul>
+                        
+                        <p style="font-weight: 700; color: var(--purple); margin-top: 30px;">
+                            معًا نبني جسر التواصل، ونرسم مستقبلًا أفضل لطفلك.
+                        </p>
+                    </div>
+                    
+                    <div class="welcome-image">
+                        <img src="parents.png" alt="طفل مع والدته">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- صفحة ملف الطفل -->
+            <div class="child-profile" id="child-profile-page">
+                <div class="profile-header">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="صورة الطفل" class="child-photo">
+                    <div class="child-info">
+                        <h2>محمد أحمد</h2>
+                        <p>العمر: 6 سنوات</p>
+                        <p>درجة التوحد: متوسطة</p>
+                    </div>
+                </div>
+                
+                <div class="progress-section">
+                    <h3>تقدم حالة الطفل</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p>65% تقدم في المهارات الاجتماعية</p>
+                </div>
+                
+                <div class="actions">
+                    <button class="btn btn-primary">إضافة تقرير يومي</button>
+                    <button class="btn btn-secondary">عرض التقارير السابقة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تنظيم القائمة الجانبية
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = {
+            home: document.getElementById('home-page'),
+            child: document.getElementById('child-profile-page')
+        };
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // إزالة التنشيط من جميع العناصر
+                navLinks.forEach(item => item.classList.remove('active'));
+                
+                // إضافة التنشيط للعنصر الحالي
+                this.classList.add('active');
+                
+                // إخفاء جميع الصفحات
+                Object.values(pages).forEach(page => {
+                    if (page) page.style.display = 'none';
+                });
+                
+                // عرض الصفحة المطلوبة
+                const pageId = this.getAttribute('data-page');
+                if (pages[pageId]) {
+                    pages[pageId].style.display = 'block';
+                }
+            });
+        });
+        
+        // إدارة القائمة الجانبية على الجوال
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        
+        hamburger.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+        });
+        
+        // الخروج من النظام
+        document.getElementById('logout').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('تم تسجيل الخروج بنجاح');
+            // هنا يمكنك إعادة التوجيه لصفحة تسجيل الدخول
+        });
+    </script>
+</body>
+</html>

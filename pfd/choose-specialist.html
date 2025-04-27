@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختيار أخصائي - نُطقنا</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --blue: #85bae2;
+      --green: #92cac7;
+      --purple: #9999c9;
+      --gradient: linear-gradient(to left, #85bae2, #92cac7, #9999c9);
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* الشريط العلوي */
+    .navbar {
+      background: var(--gradient);
+      height: 70px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 0 25px;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      text-decoration: none;
+    }
+
+        /* الشريط الجانبي */
+        .sidebar {
+      width: 280px;
+      background: white;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+      position: fixed;
+      height: calc(100vh - 70px);
+      right: 0;
+      top: 70px;
+      padding: 20px 0;
+      transition: all 0.3s;
+      z-index: 900;
+    }
+
+    .profile-section {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary-blue);
+      margin-bottom: 10px;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item {
+      margin: 5px 15px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(133, 186, 226, 0.1);
+      color: var(--primary-blue);
+    }
+
+    .nav-link i {
+      margin-left: 10px;
+      width: 25px;
+      text-align: center;
+      color: var(--primary-blue);
+    }
+
+    .nav-link.active i {
+      color: var(--primary-purple);
+    }
+
+    .logout-btn {
+      display: block;
+      width: calc(100% - 40px);
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      text-align: right;
+      color: #dc3545;
+      background: none;
+      border: none;
+      border-top: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      color: #c82333;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+      margin-right: 280px;
+      margin-top: 70px;
+      padding: 30px;
+    }
+
+    /* بطاقات الأخصائيين */
+    .specialist-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 25px;
+      margin-bottom: 30px;
+      transition: all 0.3s;
+      border-left: 4px solid var(--blue);
+    }
+
+    .specialist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .specialist-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--blue);
+      margin-left: 20px;
+    }
+
+    .specialty-badge {
+      background-color: rgba(133, 186, 226, 0.2);
+      color: var(--blue);
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .btn-request {
+      background-color: var(--blue);
+      color: white;
+      border-radius: 50px;
+      padding: 8px 25px;
+      border: none;
+      transition: all 0.3s;
+      margin-top: 15px;
+    }
+
+    .btn-request:hover {
+      background-color: #6ca3d1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(133, 186, 226, 0.3);
+    }
+
+    .btn-request:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .search-box {
+      border-radius: 50px;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+
+    .search-box:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(133, 186, 226, 0.2);
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .filter-btn {
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 8px 20px;
+      background: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn.active {
+      background-color: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    .logout-btn {
+      display: block;
+      width: calc(100% - 40px);
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      text-align: right;
+      color: #dc3545;
+      background: none;
+      border: none;
+      border-top: 1px solid #eee;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      color: #c82333;
+    }
+.sidebar-item i {
+  color: gray; /* اللون العادي */
+  transition: color 0.3s ease;
+}
+
+.sidebar-item.active i {
+  color: #85bae2; /* لون مميز للعنصر المفعّل - الأزرق مثلاً */
+}
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(100%);
+      }
+      
+      .sidebar.active {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-right: 0;
+      }
+      
+      .specialist-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .specialist-avatar {
+        margin-left: 0;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- الهيدر -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="logo.png" alt="شعار نُطقنا" height="50" class="me-2">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="indexd.html">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutd.html">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicesd.html">الخدمات</a></li>
+        <li class="nav-item"><a class="nav-link active fw-bold" href="contactd.html">اتصل بنا</a></li>
+        <li class="nav-item"><a class="btn btn-outline-primary ms-3 px-4" href="logind.html">تسجيل الدخول</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- الشريط الجانبي -->
+<div class="sidebar">
+  <div class="profile-section">
+    <a href="parent-dashboard.html">
+      <img src="parent.JPG" alt="صورة الملف الشخصي" class="profile-img">
+    </a>
+    <h5>ولي أمر</h5>
+    <p class="text-muted">مرحباً بعودتك!</p>
+  </div>
+  
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="child-profile.html" class="nav-link">
+        <i class="fas fa-child"></i>
+        <span>ملف الطفل</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="daily-reports.html" class="nav-link">
+        <i class="fas fa-clipboard-list"></i>
+        <span>تقارير السلوك اليومية</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="doctor-advice.html" class="nav-link">
+        <i class="fas fa-comment-medical"></i>
+        <span>نصائح الطبيب</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="choose-specialist.html" class="nav-link active">
+        <i class="fas fa-user-md"></i>
+        <span>اختيار أخصائي</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="videos-courses.html" class="nav-link">
+        <i class="fas fa-video"></i>
+        <span>فيديوهات ودورات</span>
+      </a>
+    </li>
+  </ul>
+  
+  <button class="logout-btn" onclick="window.location.href='logind.html'">
+    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+  </button>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+  <h2 class="mb-4">اختيار أخصائي</h2>
+  
+  <div class="mb-4">
+    <input type="text" class="form-control search-box" placeholder="ابحث عن أخصائي..." id="searchInput">
+    <div class="filter-buttons mt-3">
+      <button class="filter-btn active" data-filter="all">الكل</button>
+      <button class="filter-btn" data-filter="psychologist">أخصائي نفسي</button>
+      <button class="filter-btn" data-filter="speech_therapist">أخصائي أرطفوني</button>
+    </div>
+  </div>
+
+  <div class="row" id="specialistsContainer">
+    <!-- سيتم تعبئة الأخصائيين هنا بالجافاسكريبت -->
+    <div class="col-md-6">
+      <div class="specialist-card">
+        <div class="d-flex align-items-start">
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="صورة الأخصائي" class="specialist-avatar">
+          <div>
+            <h4>د. سارة محمد</h4>
+            <span class="specialty-badge">أخصائية نفسية</span>
+            <p><i class="fas fa-university"></i> جامعة الملك سعود</p>
+            <p><i class="fas fa-clock"></i> خبرة 5 سنوات</p>
+            <button class="btn-request" onclick="requestSpecialist(1)">طلب الجلسة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="specialist-card">
+        <div class="d-flex align-items-start">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="صورة الأخصائي" class="specialist-avatar">
+          <div>
+            <h4>د. أحمد خالد</h4>
+            <span class="specialty-badge">أخصائي أرطفوني</span>
+            <p><i class="fas fa-university"></i> جامعة القاهرة</p>
+            <p><i class="fas fa-clock"></i> خبرة 7 سنوات</p>
+            <button class="btn-request" onclick="requestSpecialist(2)">طلب الجلسة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="specialist-card">
+        <div class="d-flex align-items-start">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="صورة الأخصائي" class="specialist-avatar">
+          <div>
+            <h4>د. مريم عبدالله</h4>
+            <span class="specialty-badge">أخصائية نفسية</span>
+            <p><i class="fas fa-university"></i> جامعة الإمارات</p>
+            <p><i class="fas fa-clock"></i> خبرة 3 سنوات</p>
+            <button class="btn-request" disabled>غير متاح حالياً</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // وظيفة طلب الأخصائي
+  function requestSpecialist(specialistId) {
+    if (confirm("هل تريد طلب جلسة مع هذا الأخصائي؟")) {
+      alert("تم إرسال طلبك بنجاح، سيتم التواصل معك لتأكيد الموعد");
+      // هنا يمكنك إضافة كود لإرسال الطلب للخادم
+    }
+  }
+
+  // تصفية الأخصائيين
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const filter = this.dataset.filter;
+      const cards = document.querySelectorAll('.specialist-card');
+      
+      cards.forEach(card => {
+        if (filter === 'all' || card.querySelector('.specialty-badge').textContent.includes(filter === 'psychologist' ? 'نفسي' : 'أرطفوني')) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // بحث الأخصائيين
+  document.getElementById('searchInput').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('.specialist-card');
+    
+    cards.forEach(card => {
+      const name = card.querySelector('h4').textContent.toLowerCase();
+      const university = card.querySelector('p:nth-of-type(1)').textContent.toLowerCase();
+      
+      if (name.includes(searchTerm) || university.includes(searchTerm)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+  // تبديل القائمة الجانبية في الهواتف
+  document.addEventListener('DOMContentLoaded', function() {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    navbarToggler.addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+  });
+</script>
+
+</body>
+</html>
